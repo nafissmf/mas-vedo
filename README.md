@@ -8,10 +8,10 @@ Aplikasi Nuxt untuk kuesioner tesis tentang *Job Insecurity*, *Organizational Ju
 2. Instal dependensi dengan `npm install` lalu jalankan pengembangan dengan `npm run dev`.
 3. Buka `http://localhost:3000`.
 
-Untuk menjalankan seluruh stack baru dengan Docker, ganti password default pada `docker-compose.yml`, lalu jalankan `docker compose up --build`.
+Untuk menjalankan dengan Docker, pastikan `mysql-container` sudah berjalan di network `app-bridge`, isi `.env`, lalu jalankan `docker compose up -d --build`.
 
 ## Menggunakan MySQL container yang sudah ada
 
-Secara default aplikasi mencari host `mysql-container`. Pastikan container Nuxt dan MySQL berada pada jaringan Docker yang sama, atau set `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, dan `DB_PASSWORD` di `.env`. Jalankan isi [`database/init.sql`](database/init.sql) sekali pada database tujuan untuk membuat tabel `responses` dan `answers`.
+Aplikasi membaca `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, dan `DB_PASSWORD` dari `.env`. Container aplikasi terhubung ke network `app-bridge` yang sama dengan `mysql-container`. Jalankan isi [`database/init.sql`](database/init.sql) sekali pada database tujuan untuk membuat tabel `responses` dan `answers`.
 
 Data identitas dipisahkan dari jawaban. Setiap pengiriman menghasilkan UUID anonim (`respondent_code`) dan seluruh 28 skor wajib bernilai 1–5.
