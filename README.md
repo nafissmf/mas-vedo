@@ -15,3 +15,7 @@ Untuk menjalankan dengan Docker, pastikan `mysql-container` sudah berjalan di ne
 Aplikasi membaca `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, dan `DB_PASSWORD` dari `.env`. Container aplikasi terhubung ke network `app-bridge` yang sama dengan `mysql-container`. Jalankan isi [`database/init.sql`](database/init.sql) sekali pada database tujuan untuk membuat tabel `responses` dan `answers`.
 
 Data identitas dipisahkan dari jawaban. Setiap pengiriman menghasilkan UUID anonim (`respondent_code`) dan seluruh 28 skor wajib bernilai 1–5.
+
+## Back office
+
+Buka `/admin` untuk melihat, menambah, mengubah, dan menghapus data kuesioner. Isi `ADMIN_USER` dan `ADMIN_PASSWORD` di `.env`; jika kosong, back office tidak bisa diakses. Login memakai Basic Auth, jadi di server wajib diakses lewat HTTPS.
