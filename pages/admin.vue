@@ -112,6 +112,7 @@ async function logout() {
     </section>
 
     <form v-else class="card" @submit.prevent="save">
+      <button type="button" class="secondary back-button" @click="editing = null; error = ''">← Kembali</button>
       <h2>{{ editing ? 'Ubah data' : 'Tambah data' }}</h2>
       <div class="profile">
         <label>Nama<input v-model="form.name" required maxlength="150" /></label>
@@ -152,6 +153,7 @@ button.danger { background: #b42318; box-shadow: none; }
 .pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 20px; }
 .question { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 0; border-top: 1px solid #e5ebe8; line-height: 1.5; }
 .analysis-heading,.variable-title { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }.analysis-heading h2,.variable-title h3{margin:3px 0}.analysis-note,.analysis-footnote{color:#607174;line-height:1.55}.summary-grid,.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.summary-grid>div,.metrics>div{background:#f1f7f4;border:1px solid #dceae4;border-radius:10px;padding:14px;display:grid;gap:4px}.summary-grid strong,.metrics b{font-size:1.25rem;color:#075b53}.summary-grid span,.metrics span,.metrics small{font-size:.78rem;color:#607174}.variable-report{border-top:1px solid #dce7e2;padding:24px 0}.variable-title p{margin:5px 0 0;color:#607174}.code{display:inline-block;background:#e4f1ec;color:#075b53;border-radius:5px;padding:3px 7px;font-size:.75rem;font-weight:700}.badges{display:flex;gap:7px;flex-wrap:wrap}.pass,.review{display:inline-block;border-radius:99px;padding:4px 8px;font-size:.72rem;font-weight:700;white-space:nowrap}.pass{background:#dcf3e8;color:#08715f}.review{background:#fff0dc;color:#a04a00}.indicator-text{display:block;color:#607174;font-size:.78rem;margin-top:3px}.analysis-footnote{font-size:.82rem}
+.back-button { margin-bottom: 16px; }
 .profile { margin-bottom: 24px; }
 select { padding: 8px 12px; border: 1px solid #ccd8d4; border-radius: 8px; font: inherit; }
 @media(max-width:600px){.analysis-heading,.variable-title{flex-direction:column}.summary-grid,.metrics{grid-template-columns:1fr}.variable-title{gap:10px}}

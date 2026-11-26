@@ -13,9 +13,13 @@ export default defineNitroPlugin(() => {
       if (!statements.length) throw new Error('database/init.sql tidak ditemukan atau kosong')
       for (const statement of statements) await db().query(statement)
       const [[count]] = await db().query<any[]>('SELECT COUNT(*) AS total FROM responses')
-      if (Number(count.total) === 0) {
+      if (Number(count.total) > 0) {
+        console.log(`[init-db] Seeder dilewati: tabel responses sudah berisi ${count.total} data.`)
+      } else {
         const seed = await useStorage('assets:database').getItem('seed-data.json') as SeedResponse[] | null
-        if (Array.isArray(seed) && seed.length) {
+        if (!Array.isArray(seed) || !seed.length) {
+          console.warn('[init-db] Seeder dilewati: seed-data.json tidak ditemukan atau kosong.')
+        } else {
           const connection = await db().getConnection()
           try {
             await connection.beginTransaction()
