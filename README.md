@@ -12,7 +12,7 @@ Untuk menjalankan dengan Docker, pastikan `mysql-container` sudah berjalan di ne
 
 ## Menggunakan MySQL container yang sudah ada
 
-Aplikasi membaca `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, dan `DB_PASSWORD` dari `.env`. Container aplikasi terhubung ke network `app-bridge` yang sama dengan `mysql-container`. Jalankan isi [`database/init.sql`](database/init.sql) sekali pada database tujuan untuk membuat tabel `responses` dan `answers`.
+Aplikasi membaca `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, dan `DB_PASSWORD` dari `.env`. Container aplikasi terhubung ke network `app-bridge` yang sama dengan `mysql-container`. Database dan user MySQL harus sudah dibuat; tabel `responses` dan `answers` dibuat otomatis dari [`database/init.sql`](database/init.sql) saat aplikasi start.
 
 Data identitas dipisahkan dari jawaban. Setiap pengiriman menghasilkan UUID anonim (`respondent_code`) dan seluruh 28 skor wajib bernilai 1–5.
 
