@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   await transaction(async (connection) => {
     const [rows] = await connection.query<RowDataPacket[]>('SELECT id FROM responses WHERE id = ? FOR UPDATE', [id])
     if (!rows[0]) throw createError({ statusCode: 404, statusMessage: 'Data tidak ditemukan.' })
-    await connection.execute('UPDATE responses SET name = ?, work_unit = ?, position = ?, years_of_service = ? WHERE id = ?', [data.name, data.workUnit, data.position, data.yearsOfService, id])
+    await connection.execute('UPDATE responses SET name = ?, work_unit = ?, position = ?, years_of_service = ?, submitted_at = COALESCE(?, submitted_at) WHERE id = ?', [data.name, data.workUnit, data.position, data.yearsOfService, data.submittedAt, id])
     await connection.execute('DELETE FROM answers WHERE response_id = ?', [id])
     await insertAnswers(connection, id, data.answers)
   })
